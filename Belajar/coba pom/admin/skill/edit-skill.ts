@@ -9,7 +9,7 @@ export class PlaywrightEditSkill {
 
   constructor(page: Page) {
     this.page = page;
-    this.buttonEditSkill = page.getByRole('button').getByTestId('button-edit');
+    this.buttonEditSkill = page.locator('#button-edit').nth(1);
     this.ubahSkill = page.getByRole('textbox');
     this.simpanSkill = page.getByRole('button', { name: 'Simpan' });
     this.dashboardHeader = page.locator('h3', {hasText: 'LIST SKILL'});

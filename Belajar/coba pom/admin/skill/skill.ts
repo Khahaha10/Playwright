@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 
-export class PlaywrightAddSkill {
+export class PlaywrightGoToSkill {
   readonly page: Page;
   readonly sidebarSkill: Locator;
   readonly dashboardHeader: Locator;
