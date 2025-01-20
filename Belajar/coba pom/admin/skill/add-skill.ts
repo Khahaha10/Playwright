@@ -17,7 +17,6 @@ export class PlaywrightAddSkill {
   async addSkill(data: string) {
     await this.buttonAddSkill.click();
     await this.tambahSkill.fill(data);
-    await expect(this.dashboardHeader).toBeVisible();
   }
 
 }

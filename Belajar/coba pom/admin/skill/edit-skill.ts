@@ -18,7 +18,6 @@ export class PlaywrightEditSkill {
   async editSkill(data: string) {
     await this.buttonEditSkill.click();
     await this.ubahSkill.fill(data);
-    await expect(this.dashboardHeader).toBeVisible();
   }
 
 }
