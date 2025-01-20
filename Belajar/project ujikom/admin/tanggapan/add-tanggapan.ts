@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { faker } from '@faker-js/faker/locale/id_ID';
 
 export class PlaywrightAddTanggapan {
   readonly page: Page;
@@ -15,7 +16,8 @@ export class PlaywrightAddTanggapan {
     this.checkModalAdd = page.locator('#pengaduanProses10').getByText('Judul');
   }
 
-  async addTanggapan(tanggapan : string,){
+  async addTanggapan() {
+    const tanggapan = faker.lorem.sentences(2);
     await this.pilihPengaduan.click();
     await expect(this.checkModalAdd).toBeVisible();
     await this.statusPengaduan.selectOption('diverifikasi');

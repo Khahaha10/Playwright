@@ -14,6 +14,9 @@ import { PlaywrightDeleteMasyarakat } from './project ujikom/admin/masyarakat/de
 
 import { PlaywrightGoToPengaduan } from './project ujikom/admin/tanggapan/tanggapan';
 import { PlaywrightAddTanggapan } from './project ujikom/admin/tanggapan/add-tanggapan';
+import { PlaywrightEditTanggapan } from './project ujikom/admin/tanggapan/edit-tanggapan';
+import { PlaywrightDeletePengaduan } from './project ujikom/admin/tanggapan/delete-tanggapan';
+import { PlaywrightReportPengaduan } from './project ujikom/admin/tanggapan/report-tanggapan';
 
 test.describe('Admin', () => {
   let loginAdminPage: PlaywrightLoginAdmin;
@@ -30,6 +33,9 @@ test.describe('Admin', () => {
 
   let pengaduanPage: PlaywrightGoToPengaduan;
   let addTanggapanPage: PlaywrightAddTanggapan;
+  let editTanggapanPage: PlaywrightEditTanggapan;
+  let deletePengaduanPage: PlaywrightDeletePengaduan;
+  let reportPengaduanPage: PlaywrightReportPengaduan;
   
   test.beforeEach(async ({ page }) => {
     loginAdminPage = new PlaywrightLoginAdmin(page);
@@ -46,6 +52,9 @@ test.describe('Admin', () => {
 
     pengaduanPage = new PlaywrightGoToPengaduan(page);
     addTanggapanPage = new PlaywrightAddTanggapan(page);
+    editTanggapanPage = new PlaywrightEditTanggapan(page);
+    deletePengaduanPage = new PlaywrightDeletePengaduan(page);
+    reportPengaduanPage = new PlaywrightReportPengaduan(page);
 
     await page.goto('http://localhost:8000/');
     await loginAdminPage.loginAdmin('admin@gmail.com', 'admin123');
@@ -81,22 +90,11 @@ test.describe('Admin', () => {
 
   test('add petugas', async () => {
     await petugasPage.goToPetugas();
-    await addPetugasPage.addPetugas(
-      'petugas tes 123',
-      'petugastes123@gmail.com',
-      '083213123123',
-      'tes12345'
-    );
+    await addPetugasPage.addPetugas();
   });
-
   test('edit petugas', async () => {
     await petugasPage.goToPetugas();
-    await editPetugasPage.editPetugas(
-      'Budi',
-      'Screenshot 2024-03-06 090435.png',
-      'petugasedit@gmail.com',
-      '000001312312'
-      );
+    await editPetugasPage.editPetugas();
   });
   
   test('delete petugas', async () => {
@@ -106,6 +104,21 @@ test.describe('Admin', () => {
   
   test('add tanggapan', async () => {
     await pengaduanPage.goToPengaduan();
-    await addTanggapanPage.addTanggapan('mantap 123');
+    await addTanggapanPage.addTanggapan();
   });
+
+  test('edit tanggapan', async () => {
+    await pengaduanPage.goToPengaduan();
+    await editTanggapanPage.editTanggapan();
+  });
+
+  test('delete pengaduan', async () => {
+    await pengaduanPage.goToPengaduan();
+    await deletePengaduanPage.deletePengaduan();
+  })
+
+  test('report pengaduan', async () => {
+    await pengaduanPage.goToPengaduan();
+    await reportPengaduanPage.reportPengaduan();
+  })
 });
