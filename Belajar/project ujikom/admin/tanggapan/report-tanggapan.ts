@@ -6,10 +6,13 @@ export class PlaywrightReportPengaduan {
 
   constructor(page: Page) {
     this.page = page;
-    this.buttonPrintPengaduan = page.getByRole('link', { name: ' Print' }).first();
+    this.buttonPrintPengaduan = page.getByRole('link', { name: ' Print' }).last();
   }
 
-  async reportPengaduan(){
-    await this.buttonPrintPengaduan.click();
+  async reportPengaduan() {
+    const [newPage] = await Promise.all([
+      this.page.context().waitForEvent('page'),
+      this.buttonPrintPengaduan.click()
+    ]);
   }
 }

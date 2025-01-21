@@ -7,7 +7,7 @@ export class PlaywrightDeleteMasyarakat {
 
   constructor(page: Page) {
     this.page = page;
-    this.buttonHapusMasyarakat = page.getByRole('row', { name: '5 Foto Profil edit 123' }).getByRole('button');
+    this.buttonHapusMasyarakat = page.getByRole('row').getByRole('button').last();
     this.checkModalDelete = page.getByRole('heading', { name: 'Hapus Masyarakat' });
   }
 

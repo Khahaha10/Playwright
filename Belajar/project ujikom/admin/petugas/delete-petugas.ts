@@ -7,7 +7,7 @@ export class PlaywrightDeletePetugas {
 
   constructor(page: Page) {
     this.page = page;
-    this.buttonHapusPetugas = page.getByRole('row', { name: '4 Foto Budi petugas' }).getByRole('button');
+    this.buttonHapusPetugas = page.getByRole('row').getByRole('button').last();
     this.checkModalDelete = page.getByRole('heading', { name: 'Hapus Petugas' });
   }
 

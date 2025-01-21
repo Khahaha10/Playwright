@@ -62,25 +62,12 @@ test.describe('Admin', () => {
 
   test('add masyarakat', async () => {
     await masyarakatPage.goToMasyarakat();
-    await addMasyarakatPage.addMasyarakat(
-      'tes 123',
-      '000112111323', 
-      'tes123@gmail.com',
-      '000001312312',
-      'tes12345'
-      );
+    await addMasyarakatPage.addMasyarakat();
   });
 
   test('edit masyarakat', async () => {
     await masyarakatPage.goToMasyarakat();
-    await editMasyarakatPage.editMasyarakat(
-      'edit 123',
-      '000112111323', 
-      'Screenshot 2024-03-06 090435.png',
-      'edit123@gmail.com',
-      '000001312312',
-      'edit12345'
-      );
+    await editMasyarakatPage.editMasyarakat();
   });
 
   test('delete masyarakat', async () => {
