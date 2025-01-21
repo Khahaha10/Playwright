@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import { PlaywrightLoginAdmin } from './project ujikom/admin/login-admin';
+import { PlaywrightEditProfil } from './project ujikom/admin/edit-profil';
 
 import { PlaywrightGoToPetugas } from './project ujikom/admin/petugas/petugas';
 import { PlaywrightAddPetugas } from './project ujikom/admin/petugas/add-petugas';
@@ -24,6 +25,7 @@ import { PlaywrightDeleteReply } from './project ujikom/admin/forum/delete-reply
 
 test.describe('Admin', () => {
   let loginAdminPage: PlaywrightLoginAdmin;
+  let editProfilPage: PlaywrightEditProfil;
 
   let masyarakatPage: PlaywrightGoToMasyarakat;
   let addMasyarakatPage: PlaywrightAddMasyarakat;
@@ -47,6 +49,7 @@ test.describe('Admin', () => {
 
   test.beforeEach(async ({ page }) => {
     loginAdminPage = new PlaywrightLoginAdmin(page);
+    editProfilPage = new PlaywrightEditProfil(page);
 
     masyarakatPage = new PlaywrightGoToMasyarakat(page);
     addMasyarakatPage = new PlaywrightAddMasyarakat(page);
@@ -130,4 +133,10 @@ test.describe('Admin', () => {
     await forumPage.goToForum();
     await deleteReplyPage.deleteReply();
   })
+
+  test('edit profil', async () => {
+    await editProfilPage.editProfil();
+  })
+
+  
 });
