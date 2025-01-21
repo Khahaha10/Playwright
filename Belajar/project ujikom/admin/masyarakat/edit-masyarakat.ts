@@ -1,4 +1,8 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { faker } from '@faker-js/faker/locale/id_ID';
+import fs from 'fs';
+import path from 'path';
+import fetch from 'node-fetch'; 
 
 export class PlaywrightEditMasyarakat {
   readonly page: Page;
@@ -16,7 +20,7 @@ export class PlaywrightEditMasyarakat {
 
   constructor(page: Page) {
     this.page = page;
-    this.buttonEditMasyarakat = page.getByRole('row', { name: '5 Foto Profil edit 123' }).getByRole('link');
+    this.buttonEditMasyarakat = page.getByRole('row').getByRole('link').last();
 
     this.namaMasyarakat = page.getByRole('dialog', { name: 'Edit Profil Masyarakat' }).locator('#nama_masyarakat');
     this.nikMasyarakat = page.getByRole('dialog', { name: 'Edit Profil Masyarakat' }).locator('#nik');
@@ -31,12 +35,28 @@ export class PlaywrightEditMasyarakat {
     this.back = page.getByText('List Masyarakat');
   }
 
-  async editMasyarakat(nama : string, nik : string, foto : string, email : string, telp : string, password : string){
+  async downloadImage(url: string, filePath: string) {
+    const response = await fetch(url);
+    const buffer = await response.buffer();
+    fs.writeFileSync(filePath, buffer);
+  }
+
+  async editMasyarakat(){
+    const username = faker.internet.userName();
+    const telp = faker.phone.number({ style: 'human' });
+    const email = faker.internet.exampleEmail();
+    const password = faker.internet.password();
+    const nik = faker.string.numeric(12)
+
+    const avatarUrl = faker.image.avatar();
+    const filePath = path.resolve(__dirname, 'temp_avatar.jpg'); 
+    await this.downloadImage(avatarUrl, filePath);
+    
     await this.buttonEditMasyarakat.click();
     await expect(this.checkModalEdit).toBeVisible();
-    await this.namaMasyarakat.fill(nama);
+    await this.namaMasyarakat.fill(username);
     await this.nikMasyarakat.fill(nik);
-    await this.fotoMasyarakat.setInputFiles(foto);
+    await this.fotoMasyarakat.setInputFiles(filePath);
     await this.emailMasyarakat.fill(email);
     await this.telpMasyarakat.fill(telp);
     await this.passwordMasyarakat.fill(password);
