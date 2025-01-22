@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { PlaywrightLoginAdmin } from './project ujikom/admin/login-admin';
 import { PlaywrightEditProfil } from './project ujikom/admin/edit-profil';
+import { PlaywrightGoToHome } from './project ujikom/admin/home-admin';
 
 import { PlaywrightGoToPetugas } from './project ujikom/admin/petugas/petugas';
 import { PlaywrightAddPetugas } from './project ujikom/admin/petugas/add-petugas';
@@ -26,6 +27,7 @@ import { PlaywrightDeleteReply } from './project ujikom/admin/forum/delete-reply
 test.describe('Admin', () => {
   let loginAdminPage: PlaywrightLoginAdmin;
   let editProfilPage: PlaywrightEditProfil;
+  let homePage: PlaywrightGoToHome;
 
   let masyarakatPage: PlaywrightGoToMasyarakat;
   let addMasyarakatPage: PlaywrightAddMasyarakat;
@@ -50,6 +52,7 @@ test.describe('Admin', () => {
   test.beforeEach(async ({ page }) => {
     loginAdminPage = new PlaywrightLoginAdmin(page);
     editProfilPage = new PlaywrightEditProfil(page);
+    homePage = new PlaywrightGoToHome(page);
 
     masyarakatPage = new PlaywrightGoToMasyarakat(page);
     addMasyarakatPage = new PlaywrightAddMasyarakat(page);
@@ -66,13 +69,17 @@ test.describe('Admin', () => {
     editTanggapanPage = new PlaywrightEditTanggapan(page);
     deletePengaduanPage = new PlaywrightDeletePengaduan(page);
     reportPengaduanPage = new PlaywrightReportPengaduan(page);
-    
+
     forumPage = new PlaywrightGoToForum(page);
     deleteForumPage = new PlaywrightDeleteForum(page);
     deleteReplyPage = new PlaywrightDeleteReply(page);
 
     await page.goto('http://localhost:8000/');
     await loginAdminPage.loginAdmin('admin@gmail.com', 'admin123');
+  });
+
+  test('show home', async () => {
+    await homePage.goToHome();
   });
 
   test('show masyarakat', async () => {

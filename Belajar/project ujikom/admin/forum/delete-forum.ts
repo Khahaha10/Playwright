@@ -4,15 +4,21 @@ export class PlaywrightDeleteForum {
   readonly page: Page;
   readonly buttonHapusForum: Locator;
   readonly checkModalDelete: Locator;
+  readonly buttonDelete: Locator;
+  readonly dashboardHeader: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.buttonHapusForum = page.locator('div:nth-child(2) > .btn').first();
+    this.buttonHapusForum = page.locator('#delete-forum').last();
     this.checkModalDelete = page.getByRole('heading', { name: 'Delete Forum' });
+    this.buttonDelete = page.getByRole('button', { name: 'Delete Forum' });
+    this.dashboardHeader = page.locator('h4', {hasText: 'Forum Diskusi'});
   }
 
   async deleteForum(){
     await this.buttonHapusForum.click();
     await expect(this.checkModalDelete).toBeVisible();
+    await this.buttonDelete.click();
+    await expect(this.dashboardHeader).toBeVisible();
   }
 }

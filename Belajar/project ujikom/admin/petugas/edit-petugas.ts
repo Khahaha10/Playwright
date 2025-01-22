@@ -45,9 +45,9 @@ export class PlaywrightEditPetugas {
 
     await expect(this.checkModalEdit).toBeVisible();
     await this.namaPetugas.fill(username);
-    await this.fotoPetugas.setInputFiles(filePath); 
     await this.telpPetugas.fill(telp);
     await this.emailPetugas.fill(email);
+    await this.fotoPetugas.setInputFiles(filePath); 
     await this.simpanEdit.click();
     await expect(this.back).toBeVisible();
 

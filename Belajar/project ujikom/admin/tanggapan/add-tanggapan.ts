@@ -7,13 +7,17 @@ export class PlaywrightAddTanggapan {
   readonly statusPengaduan: Locator;
   readonly tanggapanPetugas: Locator;
   readonly checkModalAdd: Locator;
+  readonly buttonSimpan: Locator;
+  readonly dashboardHeader: Locator
 
   constructor(page: Page) {
     this.page = page;
-    this.pilihPengaduan = page.getByText('Judul Lorem ipsum dolor sit').first();
+    this.pilihPengaduan = page.locator('#card-pengaduan').first();
     this.statusPengaduan = page.getByLabel('Update Status');
     this.tanggapanPetugas = page.getByLabel('Tanggapan Petugas');
-    this.checkModalAdd = page.locator('#pengaduanProses10').getByText('Judul');
+    this.checkModalAdd = page.getByRole('heading', { name: 'Tanggapan Petugas:' });
+    this.buttonSimpan = page.getByRole('button', { name: 'Kirim Tanggapan' });
+    this.dashboardHeader = page.getByRole('heading', { name: 'Pengaduan'}).locator('b');
   }
 
   async addTanggapan() {
@@ -22,5 +26,7 @@ export class PlaywrightAddTanggapan {
     await expect(this.checkModalAdd).toBeVisible();
     await this.statusPengaduan.selectOption('diverifikasi');
     await this.tanggapanPetugas.fill(tanggapan);
+    await this.buttonSimpan.click();
+    await expect(this.dashboardHeader).toBeVisible();
   }
 }
