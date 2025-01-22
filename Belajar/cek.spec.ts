@@ -75,6 +75,10 @@ test.describe('Admin', () => {
     await loginAdminPage.loginAdmin('admin@gmail.com', 'admin123');
   });
 
+  test('show masyarakat', async () => {
+    await masyarakatPage.goToMasyarakat();
+  });
+
   test('add masyarakat', async () => {
     await masyarakatPage.goToMasyarakat();
     await addMasyarakatPage.addMasyarakat();
@@ -88,12 +92,17 @@ test.describe('Admin', () => {
   test('delete masyarakat', async () => {
     await masyarakatPage.goToMasyarakat();
     await deleteMasyarakatPage.deleteMasyarakat();
-  })
+  });
+
+  test('show petugas', async () => {
+    await petugasPage.goToPetugas();
+  });
 
   test('add petugas', async () => {
     await petugasPage.goToPetugas();
     await addPetugasPage.addPetugas();
   });
+
   test('edit petugas', async () => {
     await petugasPage.goToPetugas();
     await editPetugasPage.editPetugas();
@@ -104,6 +113,10 @@ test.describe('Admin', () => {
     await deletePetugasPage.deletePetugas();
   })
   
+  test('show pengaduan', async () => {
+    await pengaduanPage.goToPengaduan();
+  });
+
   test('add tanggapan', async () => {
     await pengaduanPage.goToPengaduan();
     await addTanggapanPage.addTanggapan();
@@ -117,26 +130,29 @@ test.describe('Admin', () => {
   test('delete pengaduan', async () => {
     await pengaduanPage.goToPengaduan();
     await deletePengaduanPage.deletePengaduan();
-  })
+  });
 
   test('report pengaduan', async () => {
     await pengaduanPage.goToPengaduan();
     await reportPengaduanPage.reportPengaduan();
-  })
+  });
   
+  test('show forum', async () => {
+    await forumPage.goToForum();
+  });
+
   test('delete forum', async () => {
     await forumPage.goToForum();
     await deleteForumPage.deleteForum();
-  })
+  });
 
   test('delete reply', async () => {
     await forumPage.goToForum();
     await deleteReplyPage.deleteReply();
-  })
+  });
 
   test('edit profil', async () => {
     await editProfilPage.editProfil();
-  })
+  });
 
-  
 });
