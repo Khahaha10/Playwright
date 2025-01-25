@@ -35,7 +35,7 @@ export class PlaywrightEditPetugas {
 
   async editPetugas() {
     await this.buttonEditPetugas.click();
-    const username = faker.internet.userName();
+    const username = faker.internet.username();
     const email = faker.internet.exampleEmail();
     const telp = faker.phone.number({ style: 'human' });
 

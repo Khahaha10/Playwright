@@ -27,7 +27,7 @@ export class PlaywrightAddMasyarakat {
   }
 
   async addMasyarakat(){
-    const username = faker.internet.userName();
+    const username = faker.internet.username();
     const telp = faker.phone.number({ style: 'human' });
     const email = faker.internet.exampleEmail();
     const password = faker.internet.password();

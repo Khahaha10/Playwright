@@ -4,23 +4,25 @@ import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch'; 
 
-export class PlaywrightEditProfil {
+export class PlaywrightEditProfilMs {
   readonly page: Page;
   readonly buttonEditProfil: Locator;
   readonly checkModal: Locator;
   readonly buttonSimpan: Locator;
-  readonly namaAdmin: Locator;
-  readonly telpAdmin: Locator;
-  readonly fotoAdmin: Locator;
+  readonly nikMasyarakat: Locator;
+  readonly namaMasyarakat: Locator;
+  readonly telpMasyarakat: Locator;
+  readonly fotoMasyarakat: Locator;
   readonly dashboardHeader: Locator;
 
 
   constructor(page: Page) {
     this.buttonEditProfil = page.getByRole('link', { name: 'Foto Profil' });
-    this.checkModal = page.getByRole('heading', { name: 'Edit Profil Petugas' });
-    this.namaAdmin = page.getByLabel('Nama');
-    this.telpAdmin = page.getByLabel('No. Telepon');
-    this.fotoAdmin = page.getByLabel('Foto Profil');
+    this.checkModal = page.getByRole('heading', { name: 'Edit Profil Masyarakat' });
+    this.nikMasyarakat = page.getByLabel('NIK');
+    this.namaMasyarakat = page.getByLabel('Nama');
+    this.telpMasyarakat = page.getByLabel('No. Telepon');
+    this.fotoMasyarakat = page.getByLabel('Foto Profil');
     this.buttonSimpan = page.getByRole('button', { name: 'Simpan' });
     this.dashboardHeader = page.locator('h4', {hasText: 'Home'});
   }
@@ -31,8 +33,9 @@ export class PlaywrightEditProfil {
     fs.writeFileSync(filePath, buffer);
   }
 
-  async editProfil() {
-    const username = faker.internet.username();
+  async editProfilMs() {
+    const nik = faker.string.numeric(16)
+    const username = faker.internet.userName();
     const telp = faker.phone.number({ style: 'human' });
 
     const avatarUrl = faker.image.avatar();
@@ -41,9 +44,10 @@ export class PlaywrightEditProfil {
 
     await this.buttonEditProfil.click();
     await expect(this.checkModal).toBeVisible();
-    await this.namaAdmin.fill(username);
-    await this.telpAdmin.fill(telp);
-    await this.fotoAdmin.setInputFiles(filePath);
+    await this.nikMasyarakat.fill(nik);
+    await this.namaMasyarakat.fill(username);
+    await this.telpMasyarakat.fill(telp);
+    await this.fotoMasyarakat.setInputFiles(filePath);
     await this.buttonSimpan.click();
     await expect(this.dashboardHeader).toBeVisible();
   }

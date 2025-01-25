@@ -25,7 +25,7 @@ export class PlaywrightAddPetugas {
   }
 
   async addPetugas(){
-    const username = faker.internet.userName();
+    const username = faker.internet.username();
     const password = faker.internet.password();
     const email = faker.internet.exampleEmail();
     const telp = faker.phone.number({ style: 'human' });
